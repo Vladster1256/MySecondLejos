@@ -1,5 +1,6 @@
 package robot.controller;
 
+import robot.model.AtonomousCommands;
 import lejos.nxt.*;
 
 public class AtonomousController
@@ -8,6 +9,8 @@ public class AtonomousController
 	private TouchSensor frontTouch;
 	private TouchSensor backTouch;
 	private SoundSensor microphone;
+	public AtonomousCommands myCommands;
+	
 
 	public AtonomousController()
 	{
@@ -15,6 +18,12 @@ public class AtonomousController
 		frontTouch = new TouchSensor(SensorPort.S2);
 		backTouch = new TouchSensor(SensorPort.S3);
 		microphone = new SoundSensor(SensorPort.S4);
+
+	}
+	
+	public boolean isRobotOn()
+	{
+		
 	}
 
 	public void start()
@@ -48,34 +57,15 @@ public class AtonomousController
 	 */
 	public void driveAroundRoom()
 	{
-
-	}
-
-	/**
-	 * 
-	 * @param vertexCount
-	 * @param length
-	 */
-	public void drawShape(int vertexCount, int length)
-	{
-		int angle = calculateAngle(vertexCount);
-
-		for (int drawCount = 0; drawCount < vertexCount; drawCount++)
+		if(myCommands.getTooClose()== false)
 		{
-			try
-			{
-				Motor.A.forward();
-				Motor.B.forward();
-				Thread.sleep(length * 1000);
-				Motor.A.stop();
-				Motor.B.stop();
-				Motor.A.rotate(-angle, true);
-				Motor.B.rotate(angle, true);
-			} catch (Exception threadException)
-			{
-				System.out.print(threadException.getMessage());
-			}
+			while(myCommands.getTooClose())
 		}
+	}
+	
+	public double getDistance()
+	{
+		while()
 	}
 
 	/**
